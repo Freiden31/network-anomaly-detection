@@ -50,8 +50,9 @@ function Form({ route, method, onOtpRequest, onForgotPassword }) {
         formData.append("role", role);
         if (image) formData.append("profile_image", image);
 
-        res = await api.post(route, formData); // Let axios handle the Content-Type
-
+        res = await api.post(route, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
         setMessage("Registration successful! Please check your email for OTP.");
         localStorage.setItem("email", email);
         if (typeof onOtpRequest === "function") {
